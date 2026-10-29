@@ -11,7 +11,6 @@ echo "# params: ${ROWS}x${COLS}, ksize=$KSIZE, K=$K, runs=$RUNS"
 echo "# nproc: $(nproc)"
 echo "p,T,S,E"
 
-# --- T(1) — базовая точка для ускорения ---
 T1=999999
 for r in $(seq $RUNS); do
     T=$(echo "${ROWS} ${COLS} ${KSIZE} ${K} 1" | ./main | grep 'Time:' | awk '{print $2}')
@@ -21,7 +20,6 @@ S1=1.000
 E1=1.000
 echo "1,$T1,$S1,$E1"
 
-# --- остальные p ---
 for P in $THREAD_LIST; do
     [ "$P" = "1" ] && continue
     BEST=999999
